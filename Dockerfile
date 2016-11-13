@@ -16,6 +16,11 @@ RUN dpkg -i /tmp/mod_cloudflare-trusty-amd64.latest.deb
 # Configure cloudflare
 RUN sed -i -e 's/CloudFlareRemoteIPTrustedProxy/CloudFlareRemoteIPTrustedProxy 172.16.0.0\/12 192.168.0.0\/16 10.0.0.0\/8/' /etc/apache2/mods-enabled/cloudflare.conf
 
+# Disable php5
+RUN a2dismod php5
+
+# Enable php7
+RUN a2enmod php7.0
 
 # Bundle keys directory
 COPY /www/ /app/
